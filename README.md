@@ -1,15 +1,19 @@
-## Inputs from Perforce
+# carbonio-ldap-utils-store
 
-- `ZimbraLDAPUtilsExtension`
+![Contributors](https://img.shields.io/github/contributors/zextras/  "Contributors")
+![Activity](https://img.shields.io/github/commit-activity/m/zextras/  "Activity") ![License](https://img.shields.io/badge/license-AGPL%203-green
+"License")
+![Project](https://img.shields.io/badge/project-carbonio-informational
+"Project")
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/zextras.svg?style=social&label=Follow%20%40zextras)](https://twitter.com/zextras)
 
 ## Dependencies
 
-- `zm-client`
-- `zm-common`
-- `zm-store`
-- `zm-thirdparty-jars`
+- `carbonio-client`
+- `carbonio-common`
+- `carbonio-store`
+- `carbonio-thirdparty-jars`
 
-## Artifacts
+## License
 
-- `zimbraldaputils.jar`
-
+See [COPYING](COPYING) file for details
