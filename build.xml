@@ -1,8 +1,23 @@
 <project name="zm-ldap-utils-store" default="deploy">
-  <import file="../zm-zcs/ant-global.xml"/>
+  <import file="./build-common.xml" />
   <property name="ext.name" value="zimbraldaputils"/>
   <property name="extension.dist.dir" location="${dist.lib.ext.dir}/${ext.name}"/>
   <property name="extension.deploy.dir" location="${zimbra.home.dir}/lib/ext/${ext.name}"/>
+
+  <!-- Targets -->
+  <target name="publish-local-all" depends="init-ivy-cache">
+    <ant dir="./" target="publish-local" inheritAll="true" />
+    <echo>Publishing jar in local cache</echo>
+  </target>
+
+  <target name="publish-maven-all" depends="publish-local-all">
+    <ant dir="./" target="publish-maven" inheritAll="true" />
+    <echo>Publish artifacts on public maven</echo>
+  </target>
+
+  <target name="init-ivy-cache">
+    <mkdir dir="${user.home}/.ivy2/cache" />
+  </target>
   <target name="build-init">
     <mkdir dir="${build.classes.dir}"/>
     <mkdir dir="${dist.dir}"/>
@@ -10,18 +25,21 @@
     <mkdir dir="${dist.lib.ext.dir}"/>
     <mkdir dir="${extension.dist.dir}"/>
   </target>
+
   <target name="jar" depends="compile" description="Creates the jar file">
     <antcall target="zextras-jar">
       <param name="implementation.title" value="Zimbra LDAP Utilities"/>
       <param name="zimbra.extension.class" value="com.zimbra.ldaputils.ZimbraLDAPUtilsExtension"/>
     </antcall>
   </target>
+
   <!-- deploy the extension -->
   <target name="undeploy">
     <ant dir="${server.dir}" target="stop-webserver" inheritAll="false"/>
     <delete dir="${extension.deploy.dir}" verbose="true"/>
     <ant dir="${server.dir}" target="start-webserver" inheritAll="false"/>
   </target>
+
   <target name="deploy" depends="jar,set-dev-version">
     <ant dir="${server.dir}" target="stop-webserver" inheritAll="false"/>
     <delete dir="${extension.deploy.dir}" verbose="true"/>
